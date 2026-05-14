@@ -7,13 +7,13 @@
 <title>Atlas Frankfurt · Metallica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0a0f; --bg-elev: #13131c; --bg-elev-2: #1b1b26; --bg-elev-3: #22222e;
     --border: #24242f; --border-bright: #33333f;
     --text: #f0f0f5; --text-dim: #9a9aa8; --text-faint: #5a5a68;
-    --accent: #ff6b1a; --accent-bright: #ff9147;
+    --accent: #ff6b1a; --accent-bright: #ff9147; --accent-amber: #ff8c4a;
     --accent-dim: rgba(255,107,26,0.12); --accent-border: rgba(255,107,26,0.35);
     --success: #22c55e; --success-dim: rgba(34,197,94,0.12);
     --warn: #f59e0b; --warn-dim: rgba(245,158,11,0.12);
@@ -23,8 +23,9 @@
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; overscroll-behavior: none; }
   body { max-width: 440px; margin: 0 auto; padding: 0 0 60px; padding-top: env(safe-area-inset-top); position: relative; }
-  a { color: var(--accent); text-decoration: none; }
+  a { color: var(--accent-amber); text-decoration: none; }
 
+  /* Header */
   .hdr { padding: 18px 20px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
   .hdr-left { display: flex; align-items: center; gap: 10px; }
   .hdr-logo { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-bright)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #0a0a0f; box-shadow: 0 0 18px rgba(255,107,26,0.25); }
@@ -34,6 +35,7 @@
   .hdr-back { font-size: 11px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
   .hdr-back:hover { color: var(--accent); }
 
+  /* Hero */
   .hero { margin: 14px 20px 0; background: linear-gradient(135deg, rgba(255,107,26,0.18), rgba(255,107,26,0.04)); border: 1px solid var(--accent-border); border-radius: 16px; padding: 18px; position: relative; overflow: hidden; }
   .hero.planned { background: linear-gradient(135deg, rgba(59,130,246,0.16), rgba(59,130,246,0.04)); border-color: rgba(59,130,246,0.35); }
   .hero.past { background: linear-gradient(135deg, rgba(107,114,128,0.16), rgba(107,114,128,0.04)); border-color: rgba(107,114,128,0.35); }
@@ -56,25 +58,85 @@
   .notice { margin: 16px 20px 0; padding: 11px 13px; background: rgba(245,158,11,0.08); border: 1px dashed rgba(245,158,11,0.4); border-radius: 10px; font-size: 12px; color: var(--text-dim); line-height: 1.45; }
   .notice strong { color: var(--warn); font-weight: 700; }
 
+  /* === v3 Block (card) === */
   .block { margin: 16px 20px 0; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
-  .block-title { font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .block-title { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .block-icon { font-size: 16px; line-height: 1; filter: saturate(0.85); flex-shrink: 0; }
+  .block-title-text { flex: 1; }
   .block-body { font-size: 13px; color: var(--text); line-height: 1.55; }
   .block-body p { margin: 6px 0; color: var(--text-dim); }
   .block-body ul { list-style: none; padding-left: 0; margin: 6px 0; }
-  .block-body li { position: relative; padding: 5px 0 5px 14px; color: var(--text-dim); border-bottom: 1px solid var(--bg-elev-2); font-size: 12.5px; line-height: 1.45; }
+  .block-body li { position: relative; padding: 6px 0 6px 16px; color: var(--text-dim); border-bottom: 1px solid var(--bg-elev-2); font-size: 12.5px; line-height: 1.5; }
   .block-body li:last-child { border-bottom: none; }
-  .block-body li::before { content: '·'; color: var(--accent); position: absolute; left: 4px; font-weight: 700; }
+  .block-body li::before { content: '●'; color: var(--accent); position: absolute; left: 4px; font-size: 7px; top: 12px; }
   .block-body strong { color: var(--text); font-weight: 700; }
-  .block-body a.venue-link { color: var(--accent); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--accent-border); }
-  .block-body a.venue-link:hover { color: var(--accent-bright); }
+  .block-body em { color: var(--accent-amber); font-style: italic; }
+  .block-body a, .block-body a.venue-link { color: var(--accent-amber); font-weight: 600; text-decoration: none; border-bottom: 1px dashed var(--accent-border); }
+  .block-body a:hover, .block-body a.venue-link:hover { color: var(--accent-bright); }
   .block-body code { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); }
-  .block-body blockquote.quote { background: var(--bg); border-left: 3px solid var(--accent); padding: 10px 12px; margin: 8px 0; border-radius: 6px; font-size: 12.5px; color: var(--text); }
+  .block-body blockquote.quote { background: var(--bg); border-left: 3px solid var(--accent); padding: 10px 12px; margin: 8px 0 10px; border-radius: 6px; font-size: 12.5px; color: var(--text); }
   .block-body blockquote.quote p { margin: 0; color: var(--text); }
   .block-body table.facts { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 12px; }
   .block-body table.facts td { border-bottom: 1px solid var(--bg-elev-2); padding: 6px 4px; vertical-align: top; color: var(--text-dim); }
   .block-body table.facts tr:last-child td { border-bottom: none; }
   .block-body table.facts td:first-child { color: var(--text); font-weight: 600; }
 
+  /* === Highlight card (Primary Purpose / Speaking Engagement) === */
+  .block.block-highlight { background: linear-gradient(135deg, rgba(255,107,26,0.14), rgba(255,107,26,0.04)); border: 1px solid var(--accent-border); }
+  .block.block-highlight .block-title { color: var(--accent); border-bottom-color: var(--accent-border); }
+  .block.block-highlight .block-title-text { color: var(--accent); }
+  .block.block-highlight .block-body p { color: var(--text); }
+  .block.block-highlight .block-body li { color: var(--text); }
+
+  /* === Weather card === */
+  .weather-card { display: flex; flex-direction: column; gap: 6px; }
+  .weather-headline { font-size: 15px; font-weight: 700; color: var(--accent); letter-spacing: 0.3px; }
+  .weather-sub { font-size: 12.5px; color: var(--text-dim); }
+
+  /* === Atlas Updates feed === */
+  .feed { display: flex; flex-direction: column; gap: 8px; }
+  .feed-item { display: flex; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--bg-elev-2); }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-ts { font-size: 10px; color: var(--accent); font-weight: 700; letter-spacing: 0.5px; min-width: 92px; flex-shrink: 0; text-transform: uppercase; }
+  .feed-msg { font-size: 12.5px; color: var(--text-dim); flex: 1; line-height: 1.5; }
+
+  /* === Transit cards === */
+  .transit-grid { display: flex; flex-direction: column; gap: 10px; }
+  .transit-card { background: var(--bg-elev-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+  .transit-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .transit-dir-icon { font-size: 14px; line-height: 1; }
+  .transit-body { font-size: 12.5px; color: var(--text-dim); }
+  .transit-body p { margin: 4px 0; }
+  .transit-body li { padding: 4px 0 4px 14px; font-size: 12px; }
+
+  /* === Itinerary with day badges === */
+  .itin-list { display: flex; flex-direction: column; gap: 2px; }
+  .itin-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--bg-elev-2); }
+  .itin-row:last-child { border-bottom: none; }
+  .day-badge { display: inline-block; padding: 3px 8px; background: var(--accent); color: #0a0a0f; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.5px; min-width: 38px; max-width: 88px; text-align: center; flex-shrink: 0; margin-top: 1px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .itin-event { flex: 1; font-size: 12.5px; color: var(--text); line-height: 1.5; }
+  .itin-event strong { color: var(--accent-bright); }
+
+  /* === Restaurant cards (chip row pattern) === */
+  .rest-group { margin-top: 10px; }
+  .rest-group-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); margin: 12px 0 6px; padding-left: 2px; }
+  .rest-cards { display: flex; flex-direction: column; gap: 8px; }
+  .rest-card { background: var(--bg-elev-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+  .rest-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+  .rest-name a, .rest-name a.venue-link { color: var(--text); border-bottom: 1px dashed var(--accent-border); font-weight: 700; }
+  .rest-name a:hover { color: var(--accent-bright); }
+  .rest-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px; align-items: center; }
+  .chip-cat { display: inline-flex; align-items: center; padding: 3px 9px; background: var(--bg-elev-3); color: var(--text-dim); border-radius: 999px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.3px; border: 1px solid var(--border); }
+  .chip-vote { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 26px; padding: 0 8px; background: var(--bg-elev-3); border-radius: 999px; font-size: 13px; border: 1px solid var(--border); text-decoration: none; line-height: 1; }
+  .chip-vote:hover { background: var(--accent-dim); border-color: var(--accent-border); }
+  .chip-up:hover { background: var(--success-dim); border-color: rgba(34,197,94,0.4); }
+  .rest-desc { font-size: 12.5px; color: var(--text-dim); line-height: 1.5; }
+  .rest-desc strong { color: var(--text); }
+
+  /* Pro tip callout (inline italic emphasis from format_inline) */
+  .pro-tip { display: block; margin-top: 8px; padding: 8px 10px; background: var(--accent-dim); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 12px; font-style: italic; color: var(--accent-bright); }
+
+  /* === Footer === */
   .foot { padding: 30px 20px 20px; text-align: center; }
   .foot-link { display: inline-block; padding: 8px 14px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 8px; font-size: 11px; font-weight: 600; color: var(--text-dim); letter-spacing: 0.4px; }
   .foot-link:hover { color: var(--accent); border-color: var(--accent-border); }
@@ -107,23 +169,32 @@
 
   <div class="notice"><strong>Atlas placeholder.</strong> This dashboard was bootstrapped from state-file facts. The full morning render with calendar, weather, venue picks, and Atlas Updates feed runs on the next 6 AM cron.</div>
 
-  <section class="block block-status"><h2 class="block-title">Current Status</h2><div class="block-body"><blockquote class='quote'>
+  <section class="block block-status"><h2 class="block-title"><span class="block-icon" aria-hidden="true">📍</span><span class="block-title-text">Current Status</span></h2><div class="block-body"><blockquote class='quote'>
 <strong>Pre-trip · 15 days out</strong>. Hotel booked (Marriott #90375960). Delta flights in Calendar but no email confirmation seen yet (record locator TBD - verify via Delta app). Metallica M72 dates resolved: Fri May 22 + Sun May 24, both at Deutsche Bank Park.
 </blockquote></div></section>
-<section class="block block-weather"><h2 class="block-title">Weather</h2><div class="block-body weather-card"><div class="weather-headline mono">High 67-73 F / Low 50-56 F (Frankfurt, May 20-26, 2026). Mild spring, jacket for evenings. Pack layers, light rain shell for two days mid-week. Source: weather.com Frankfurt monthly.</div></div></section>
-<section class="block block-updates"><h2 class="block-title">Atlas Updates</h2><div class="block-body feed"><div class="feed-item"><div class="feed-ts mono">2026-05-10 layout</div><div class="feed-msg">v2 sections live (weather, transit, itinerary, vote-eligible cards, local tips).</div></div><div class="feed-item"><div class="feed-ts mono">2026-05-05 metallica</div><div class="feed-msg">M72 dates resolved: Fri 5/22 + Sun 5/24 at Deutsche Bank Park.</div></div><div class="feed-item"><div class="feed-ts mono">2026-05-04 hotel</div><div class="feed-msg">Marriott confirmation #90375960 (LUME Boutique Hotel Autograph Collection).</div></div><div class="feed-item"><div class="feed-ts mono">2026-05-04 discovery</div><div class="feed-msg">Trip auto-discovered from Gmail + Calendar.</div></div></div></section>
-<section class="block block-transit"><h2 class="block-title">Airport Transit</h2><div class="block-body transit-grid"><div class="transit-card"><div class="transit-label">Inbound</div><div class="transit-body"><ul>
+<section class="block block-weather"><h2 class="block-title"><span class="block-icon" aria-hidden="true">🌤️</span><span class="block-title-text">Weather</span></h2><div class="block-body weather-card"><div class="weather-headline mono">High 67-73 F / Low 50-56 F (Frankfurt, May 20-26, 2026). Mild spring, jacket for evenings. Pack layers, light rain shell for two days mid-week. Source: weather.com Frankfurt monthly.</div></div></section>
+<section class="block block-updates"><h2 class="block-title"><span class="block-icon" aria-hidden="true">⚡</span><span class="block-title-text">Atlas Updates</span></h2><div class="block-body feed"><div class="feed-item"><div class="feed-ts mono">2026-05-10 layout</div><div class="feed-msg">v2 sections live (weather, transit, itinerary, vote-eligible cards, local tips).</div></div><div class="feed-item"><div class="feed-ts mono">2026-05-05 metallica</div><div class="feed-msg">M72 dates resolved: Fri 5/22 + Sun 5/24 at Deutsche Bank Park.</div></div><div class="feed-item"><div class="feed-ts mono">2026-05-04 hotel</div><div class="feed-msg">Marriott confirmation #90375960 (LUME Boutique Hotel Autograph Collection).</div></div><div class="feed-item"><div class="feed-ts mono">2026-05-04 discovery</div><div class="feed-msg">Trip auto-discovered from Gmail + Calendar.</div></div></div></section>
+<section class="block block-primary block-highlight"><h2 class="block-title"><span class="block-icon" aria-hidden="true">🎯</span><span class="block-title-text">Primary Purpose</span></h2><div class="block-body"><p><strong>Metallica - M72 World Tour</strong> at Deutsche Bank Park (Waldstadion), Frankfurt.</p>
+<ul>
+<li><strong>Show 1</strong>: Fri May 22, 2026 · 7:00 PM CEST · Deutsche Bank Park</li>
+<li><strong>Show 2</strong>: Sun May 24, 2026 · Deutsche Bank Park</li>
+<li><strong>Format</strong>: M72 In The Round. Two-day-ticket holders get totally different setlists Fri vs Sun, with two different opening bands. ~1700 minutes of catalog spanning 40+ years.</li>
+<li><strong>Tickets</strong>: livenation.de / ticketmaster.de. Verify ticket status (Fan Club Legacy presale was 27 May 2025 9 AM CEST; Fifth Members 11 AM CEST; general sale 30 May 2025).</li>
+<li><strong>Source</strong>: metallica.com/tour, livenation.de.</li>
+</ul>
+<p>This is THE anchor of the trip and matches your Tier 1 watchlist (Metallica = top travel-for-this artist, 5 dedicated playlists).</p></div></section>
+<section class="block block-transit"><h2 class="block-title"><span class="block-icon" aria-hidden="true">🚇</span><span class="block-title-text">Transit</span></h2><div class="block-body transit-grid"><div class="transit-card"><div class="transit-label"><span class="transit-dir-icon" aria-hidden="true">🛬</span>Inbound</div><div class="transit-body"><ul>
 <li><strong>Mode</strong>: S-Bahn (S8 or S9) from Frankfurt Flughafen (FRA) to Hauptbahnhof, ~12 min, then 5-min walk to LUME on Neckarstrasse.</li>
 <li><strong>Cost</strong>: ~5.85 EUR one-way RMV ticket. Cash or contactless at platform machines.</li>
 <li><strong>Alternative</strong>: Uber / taxi ~25-35 EUR, ~20 min depending on Autobahn traffic.</li>
 <li><strong>Recommendation</strong>: S-Bahn. Fast, reliable, lands you at Hauptbahnhof which IS your neighborhood.</li>
-</ul></div></div><div class="transit-card"><div class="transit-label">Outbound</div><div class="transit-body"><ul>
+</ul></div></div><div class="transit-card"><div class="transit-label"><span class="transit-dir-icon" aria-hidden="true">🛫</span>Outbound</div><div class="transit-body"><ul>
 <li><strong>Mode</strong>: S-Bahn S8/S9 back to FRA from Hauptbahnhof, ~12 min, then walk to terminal.</li>
 <li><strong>Allow</strong>: ~90 min before international Delta departure 11:00 AM local. Leave LUME by 9:00 AM at latest.</li>
 <li><strong>Source</strong>: rmv.de, FRA Airport.</li>
 </ul></div></div></div></section>
-<section class="block block-itinerary"><h2 class="block-title">Itinerary</h2><div class="block-body itin-list"><div class="itin-row"><div class="itin-label mono">WED 5/20</div><div class="itin-event">Depart MCI 6:00 AM CT (DL 1256 to DTW), connect, DL 86 DTW to FRA at 6:45 PM CT.</div></div><div class="itin-row"><div class="itin-label mono">THU 5/21</div><div class="itin-event">Arrive FRA ~9:50 AM local. S-Bahn to Hauptbahnhof. LUME check-in. Recovery walk Mainufer. Light dinner.</div></div><div class="itin-row"><div class="itin-label mono">FRI 5/22</div><div class="itin-event">Daytime: Stadel Museum or Romer. <strong>PM 7:00</strong> Metallica M72 night 1 at Deutsche Bank Park.</div></div><div class="itin-row"><div class="itin-label mono">SAT 5/23</div><div class="itin-event">Recovery day. Coffee at Hoppenworth &amp; Ploch. Lunch + museum loop. Light dinner.</div></div><div class="itin-row"><div class="itin-label mono">SUN 5/24</div><div class="itin-event">Daytime: lighter walk. <strong>PM</strong> Metallica M72 night 2.</div></div><div class="itin-row"><div class="itin-label mono">MON 5/25</div><div class="itin-event">Depart LUME by 9 AM. S-Bahn to FRA. DL 87 11:00 AM local back to DTW, DL 2761 DTW to MCI, land 5:13 PM CT.</div></div></div></section>
-<section class="block block-hotel"><h2 class="block-title">Hotel</h2><div class="block-body"><ul>
+<section class="block block-itinerary"><h2 class="block-title"><span class="block-icon" aria-hidden="true">📅</span><span class="block-title-text">Itinerary</span></h2><div class="block-body itin-list"><div class="itin-row"><span class="day-badge mono">WED 5/20</span><div class="itin-event">Depart MCI 6:00 AM CT (DL 1256 to DTW), connect, DL 86 DTW to FRA at 6:45 PM CT.</div></div><div class="itin-row"><span class="day-badge mono">THU 5/21</span><div class="itin-event">Arrive FRA ~9:50 AM local. S-Bahn to Hauptbahnhof. LUME check-in. Recovery walk Mainufer. Light dinner.</div></div><div class="itin-row"><span class="day-badge mono">FRI 5/22</span><div class="itin-event">Daytime: Stadel Museum or Romer. <strong>PM 7:00</strong> Metallica M72 night 1 at Deutsche Bank Park.</div></div><div class="itin-row"><span class="day-badge mono">SAT 5/23</span><div class="itin-event">Recovery day. Coffee at Hoppenworth &amp; Ploch. Lunch + museum loop. Light dinner.</div></div><div class="itin-row"><span class="day-badge mono">SUN 5/24</span><div class="itin-event">Daytime: lighter walk. <strong>PM</strong> Metallica M72 night 2.</div></div><div class="itin-row"><span class="day-badge mono">MON 5/25</span><div class="itin-event">Depart LUME by 9 AM. S-Bahn to FRA. DL 87 11:00 AM local back to DTW, DL 2761 DTW to MCI, land 5:13 PM CT.</div></div></div></section>
+<section class="block block-hotel"><h2 class="block-title"><span class="block-icon" aria-hidden="true">🏨</span><span class="block-title-text">Hotel</span></h2><div class="block-body"><ul>
 <li><strong>Property</strong>: LUME Boutique Hotel, Autograph Collection</li>
 <li><strong>Address</strong>: Neckarstrasse 7-13, Frankfurt, Hessen 60329, Germany</li>
 <li><strong>Check-in</strong>: Thu May 21</li>
@@ -132,20 +203,20 @@
 <li><strong>Booked</strong>: 2026-05-04 6:07 PM CT</li>
 <li><strong>Note</strong>: TripIt safety score 27/100 (Low Risk) for the neighborhood</li>
 </ul></div></section>
-<section class="block block-restaurants"><h2 class="block-title">Restaurant Picks</h2><div class="block-body"><div class="rest-group"><div class="rest-group-label">Dinner shortlist (Bahnhofsviertel)</div><div class="rest-cards"><div class="rest-card"><div class="rest-top"><div class="rest-name"><strong>Heimat</strong></div><span class="rest-cat">modern German | Innovative German cuisine, understated elegance, hospitality-driven. Matches the Billy&#x27;s Stone Crab and Osteria Al 29 5-star pattern. Peanut note: ask kitchen at order. Source: timeout.com.</span></div><div class="rest-vote"><a class="vote-btn vote-up" href="mailto:jeff@danley.net?subject=atlas-vote&body=Heimat%20up%20trip%3Dfrankfurt-may-2026" title="Vote up">👍</a><a class="vote-btn vote-down" href="mailto:jeff@danley.net?subject=atlas-vote&body=Heimat%20down%20trip%3Dfrankfurt-may-2026" title="Vote down">👎</a></div></div><div class="rest-card"><div class="rest-top"><div class="rest-name"><strong>DAL ROTTI</strong></div><span class="rest-cat">classic Italian | Traditional Italian with modern atmosphere. Anti-scene-Italian; the Osteria Al 29 Milan pattern. Pesto uses pine nuts (tree nut, not peanut) but verify cross-contact. Source: tripadvisor.</span></div><div class="rest-vote"><a class="vote-btn vote-up" href="mailto:jeff@danley.net?subject=atlas-vote&body=DAL%20ROTTI%20up%20trip%3Dfrankfurt-may-2026" title="Vote up">👍</a><a class="vote-btn vote-down" href="mailto:jeff@danley.net?subject=atlas-vote&body=DAL%20ROTTI%20down%20trip%3Dfrankfurt-may-2026" title="Vote down">👎</a></div></div><div class="rest-card"><div class="rest-top"><div class="rest-name"><strong>Bar Shuka</strong></div><span class="rest-cat">Middle Eastern | Modern, sharing plates, urban-cool. Peanut warning: some dukkah and sauces include peanut. Confirm peanut-free or skip. Source: timeout.com.</span></div><div class="rest-vote"><a class="vote-btn vote-up" href="mailto:jeff@danley.net?subject=atlas-vote&body=Bar%20Shuka%20up%20trip%3Dfrankfurt-may-2026" title="Vote up">👍</a><a class="vote-btn vote-down" href="mailto:jeff@danley.net?subject=atlas-vote&body=Bar%20Shuka%20down%20trip%3Dfrankfurt-may-2026" title="Vote down">👎</a></div></div></div></div><div class="rest-group"><div class="rest-group-label">Skip</div><div class="rest-cards"><div class="rest-card"><div class="rest-top"><div class="rest-name"><strong>Tokygon</strong></div><span class="rest-cat">Vietnamese sushi | Vietnamese cuisine is on your peanut-exclusion list per Jeff-Profile. Do not go.</span></div><div class="rest-vote"><a class="vote-btn vote-up" href="mailto:jeff@danley.net?subject=atlas-vote&body=Tokygon%20up%20trip%3Dfrankfurt-may-2026" title="Vote up">👍</a><a class="vote-btn vote-down" href="mailto:jeff@danley.net?subject=atlas-vote&body=Tokygon%20down%20trip%3Dfrankfurt-may-2026" title="Vote down">👎</a></div></div></div></div></div></section>
-<section class="block block-coffee"><h2 class="block-title">Coffee Spots</h2><div class="block-body"><ul>
+<section class="block block-restaurants"><h2 class="block-title"><span class="block-icon" aria-hidden="true">🍽️</span><span class="block-title-text">Restaurant Picks</span></h2><div class="block-body"><div class="rest-group"><div class="rest-group-label">Dinner shortlist (Bahnhofsviertel)</div><div class="rest-cards"><div class="rest-card"><div class="rest-name"><strong>Heimat</strong></div><div class="rest-chips"><span class="chip-cat">modern German</span><a class="chip chip-vote chip-up" href="mailto:jeff@danley.net?subject=atlas-vote&body=Heimat%20up%20trip%3Dfrankfurt-may-2026" title="Vote up">👍</a><a class="chip chip-vote chip-down" href="mailto:jeff@danley.net?subject=atlas-vote&body=Heimat%20down%20trip%3Dfrankfurt-may-2026" title="Vote down">👎</a></div><div class="rest-desc">Innovative German cuisine, understated elegance, hospitality-driven. Matches the Billy&#x27;s Stone Crab and Osteria Al 29 5-star pattern. Peanut note: ask kitchen at order. Source: timeout.com.</div></div><div class="rest-card"><div class="rest-name"><strong>DAL ROTTI</strong></div><div class="rest-chips"><span class="chip-cat">classic Italian</span><a class="chip chip-vote chip-up" href="mailto:jeff@danley.net?subject=atlas-vote&body=DAL%20ROTTI%20up%20trip%3Dfrankfurt-may-2026" title="Vote up">👍</a><a class="chip chip-vote chip-down" href="mailto:jeff@danley.net?subject=atlas-vote&body=DAL%20ROTTI%20down%20trip%3Dfrankfurt-may-2026" title="Vote down">👎</a></div><div class="rest-desc">Traditional Italian with modern atmosphere. Anti-scene-Italian; the Osteria Al 29 Milan pattern. Pesto uses pine nuts (tree nut, not peanut) but verify cross-contact. Source: tripadvisor.</div></div><div class="rest-card"><div class="rest-name"><strong>Bar Shuka</strong></div><div class="rest-chips"><span class="chip-cat">Middle Eastern</span><a class="chip chip-vote chip-up" href="mailto:jeff@danley.net?subject=atlas-vote&body=Bar%20Shuka%20up%20trip%3Dfrankfurt-may-2026" title="Vote up">👍</a><a class="chip chip-vote chip-down" href="mailto:jeff@danley.net?subject=atlas-vote&body=Bar%20Shuka%20down%20trip%3Dfrankfurt-may-2026" title="Vote down">👎</a></div><div class="rest-desc">Modern, sharing plates, urban-cool. Peanut warning: some dukkah and sauces include peanut. Confirm peanut-free or skip. Source: timeout.com.</div></div></div></div><div class="rest-group"><div class="rest-group-label">Skip</div><div class="rest-cards"><div class="rest-card"><div class="rest-name"><strong>Tokygon</strong></div><div class="rest-chips"><span class="chip-cat">Vietnamese sushi</span><a class="chip chip-vote chip-up" href="mailto:jeff@danley.net?subject=atlas-vote&body=Tokygon%20up%20trip%3Dfrankfurt-may-2026" title="Vote up">👍</a><a class="chip chip-vote chip-down" href="mailto:jeff@danley.net?subject=atlas-vote&body=Tokygon%20down%20trip%3Dfrankfurt-may-2026" title="Vote down">👎</a></div><div class="rest-desc">Vietnamese cuisine is on your peanut-exclusion list per Jeff-Profile. Do not go.</div></div></div></div></div></section>
+<section class="block block-coffee"><h2 class="block-title"><span class="block-icon" aria-hidden="true">☕</span><span class="block-title-text">Coffee Spots</span></h2><div class="block-body"><ul>
 <li><strong>Hoppenworth &amp; Ploch</strong> (Westend / Nordend, ~15-20 min walk from LUME). Frankfurt specialty trailblazers since 2008, light-roast direct trade. Worth the walk per your Vesta Coffee regret rule. Source: hoppenworth-ploch.de.</li>
 <li><strong>Bohnerie cafe // rostsalon</strong> or <strong>Kaffeerosterei Wissmuller</strong>. Both top-tier on Yelp&#x27;s Frankfurt roastery list. Source: yelp.com Frankfurt.</li>
 <li><strong>Honest</strong>: Bahnhofsviertel itself is light on third-wave; the good stuff is a walk into Westend, Nordend, or Bockenheim.</li>
 </ul></div></section>
-<section class="block block-activities"><h2 class="block-title">Activity Options</h2><div class="block-body"><ul>
+<section class="block block-activities"><h2 class="block-title"><span class="block-icon" aria-hidden="true">🚶</span><span class="block-title-text">Activity Options</span></h2><div class="block-body"><ul>
 <li><strong>Stadel Museum</strong> (~1 km / 15 min walk across Eiserner Steg). 700 years of European art, neo-Renaissance building. <strong>Indoor</strong>, perfect for Sat 5/23 between Metallica nights. Matches your Nelson-Atkins playlist signal.</li>
 <li><strong>Romer + Romerberg Square</strong> (~1.2 km east). Medieval town hall complex, 15th-century facades. Photo-stop on the west side.</li>
 <li><strong>Mainufer (Main River walk)</strong> (5-min walk south). Best skyline views, locals&#x27; nightly living room.</li>
 <li><strong>Eiserner Steg (Iron Footbridge)</strong>. Pedestrian span across the Main, photogenic at dusk.</li>
 <li><strong>Bahnhofsviertel street art walk</strong>. Strong scene in the neighborhood; evening loop after dinner is on-brand.</li>
 </ul></div></section>
-<section class="block block-fitness"><h2 class="block-title">Fitness</h2><div class="block-body"><blockquote class='quote'>
+<section class="block block-fitness"><h2 class="block-title"><span class="block-icon" aria-hidden="true">💪</span><span class="block-title-text">Fitness</span></h2><div class="block-body"><blockquote class='quote'>
 <strong>Planet Fitness is a North-America chain</strong> (12+ locations in Phoenix, dozens in the US, Canada, Mexico, some Australia). <strong>Frankfurt has zero Planet Fitness locations.</strong> Substituting closest German equivalents (McFIT is the volume-priced German chain analogous to PF; FIT STAR is the 24-hour alternative). Tap to open Google Maps directions from LUME.
 </blockquote>
 <ul>
@@ -154,7 +225,7 @@
 <li><strong>Honest caveat</strong>: Verify Day-Pass availability vs. members-only at the door. McFIT typically requires a &quot;Cyberobics&quot; or M-Cobalt cross-club membership for non-resident drop-ins. Hotel front desk at LUME may also offer day-pass arrangements with a closer gym; ask on check-in.</li>
 <li><strong>Source</strong>: mcfit.com / Yelp Frankfurt gyms.</li>
 </ul></div></section>
-<section class="block block-tips"><h2 class="block-title">Local Tips</h2><div class="block-body"><ul>
+<section class="block block-tips"><h2 class="block-title"><span class="block-icon" aria-hidden="true">💡</span><span class="block-title-text">Local Tips</span></h2><div class="block-body"><ul>
 <li><strong>Cash + card</strong>: Many Frankfurt spots are card-friendly but small cafes and bars are cash-preferred. Pull 100-200 EUR at the airport ATM (better rate than hotel).</li>
 <li><strong>Language</strong>: English is universal in Bahnhofsviertel and museums, but a German greeting opens doors. &quot;Guten Tag&quot; works.</li>
 <li><strong>S-Bahn fare</strong>: 5.85 EUR single ride zone 5090, day ticket 12.10 EUR. Tap on at machines on the platform.</li>
@@ -165,7 +236,7 @@
 
   <footer class="foot">
     <a class="foot-link" href="https://vector-mac.github.io/">Back to all trips</a>
-    <div class="foot-stamp">Last rendered: May 14, 2026 09:25 CDT</div>
+    <div class="foot-stamp">Last rendered: May 14, 2026 10:02 CDT</div>
     <div class="foot-tag">Auto-updated by <span class="accent">Atlas</span></div>
   </footer>
 </body>
